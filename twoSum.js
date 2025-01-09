@@ -15,23 +15,23 @@
 // Output: [1,2]
 // Example 3:
 
-// Input: nums = [3,3], target = 6
+const nums = [3, 3];
+const target = 6;
 // Output: [0,1]
 
-const nums = [2, 7, 11, 15];
-const target = 9;
+//We want to create a map instance and then set each nums[i] to the map. We want to then check if the nums[i] - target is equal to a number that we already have in our array. Return that number
 
 var twoSum = function (nums, target) {
-  const map = new Map();
+  const numsMap = new Map();
 
   for (let i = 0; i < nums.length; i++) {
     const complement = target - nums[i];
-    if (map.has(complement)) {
-      return [map.get(complement), i];
+
+    if (numsMap.has(complement)) {
+      return [numsMap.get(complement), i];
     }
-    map.set(nums[i], i);
+    numsMap.set(nums[i], i);
   }
-  console.log(map);
   return [];
 };
 
