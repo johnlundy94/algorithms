@@ -12,24 +12,31 @@ let strs = ["flower", "flow", "flight"];
 // Input: strs = ["dog","racecar","car"]
 // Output: ""
 // Explanation: There is no common prefix among the input strings.
-//Here we are first stating that if the strs length is 0 then we return an empty string as instructed. Then we declare a variable with the name of prefix and set it to an empty string and another variable that is set to the first string in the array. After, we run a for loop that iterates through the first string setting each character to a variable called char. Then we run an inner for loop that runs while the outer for loop is running so that we can then run a check asking if the index of the first string is past the length of the other strings, or, the
 var longestCommonPrefix = function (strs) {
+  // Edge case to test, if there is no input in array in the strs value, we return an empty string.
   if (strs.length === 0) return "";
 
+  // This initializes the string as we build it
   let prefix = "";
+  // This assigns the first string in the array to firstString
   let firstString = strs[0];
 
+  // We are iterating over each letter in the first string
   for (let i = 0; i < firstString.length; i++) {
+    // Here we are grabbing the current character iteration and assigning it to char
     let char = firstString[i];
 
+    // This now starts a nested loop that loops over all the strings in the strs array
     for (let j = 0; j < strs.length; j++) {
+      // First we check if the outer loop has exceeded the other string's length or if the current character at position i does not match the current char value then we return the prefix ending the loop.
       if (i >= strs[j].length || strs[j][i] !== char) {
         return prefix;
       }
     }
+    // Here we add the char value to the prefix value string if the checks are met.
     prefix += char;
   }
-
+  // We are returning the prefix value. Keep in mind that the reason this return prefix is here with the inner loop return prefix, is because we want the edge case where if the first string's characters match all the other characters in the strings, such as strs = ["flow", "flowing", "flowed"]
   return prefix;
 };
 
