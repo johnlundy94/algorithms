@@ -22,8 +22,11 @@
 const s = "abcabcbb";
 
 var lengthOfLongestSubstring = function (s) {
+  // start of the current window
   let start = 0;
+  // Tracks the maximum length of a valid substring
   let maxLen = 0;
+  // Has map to store the last seen index of each character. A hash map where keys are characters and values are their most recent indices in the string.
   let usedChar = {};
 
   for (let i = 0; i < s.length; i++) {
@@ -31,16 +34,19 @@ var lengthOfLongestSubstring = function (s) {
 
     //If we have seen this character and it's last seen position is within the current window
     if (usedChar[currentChar] !== undefined && usedChar[currentChar] >= start) {
-      //Move the start to one position after the last occurrence of currentChar
+      //If a duplicate is found, move the window's start to the index after the last occurrence of the duplicate character. This removes the duplicate and all characters before it from the window.
       start = usedChar[currentChar] + 1;
     }
 
     //update the last seen index of the current character
     usedChar[currentChar] = i;
 
-    //Calculate the length of the current valid substring window
+    //Calculate the length of the current window, from start to i
     const windowLength = i - start + 1;
+    // Updates maxLen if the current window is longer than the previous maximum
     maxLen = Math.max(maxLen, windowLength);
   }
   return maxLen;
 };
+
+//
