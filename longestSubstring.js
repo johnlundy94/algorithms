@@ -43,7 +43,7 @@ var lengthOfLongestSubstring = function (s) {
 
     //Calculate the length of the current window, from start to i
     const windowLength = i - start + 1;
-    // Updates maxLen if the current window is longer than the previous maximum
+    // Updates maxLen if the current window is longer than the previous maximum. This is comparing the last iterations with the current one through .max()
     maxLen = Math.max(maxLen, windowLength);
   }
   return maxLen;
