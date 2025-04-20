@@ -37,16 +37,17 @@ var isPalindrome = function (x) {
 
   // Process the digits of x to build reversed, but only adding them to reversed.
   while (x > reversed) {
-    // This extracts the last digit. Remember the modulo operator gives the remainder when x is divided by 10. (12, 12 % 10 = 2)
+    // This extracts the last digit. Remember the modulo operator gives the remainder when x is divided by 10. (1221, 1221 % 10 = 1)
     const lastDigit = x % 10;
 
-    // Append lastDigit to reversed by shifting reversed left (multiplying by 10) and adding the new digit. (x = 12. reversed = 0, lastDigit = 2. reversed = 0 * 10 + 2 = 2. Now, reversed = 2)
+    // Append lastDigit to reversed by shifting reversed left (multiplying by 10) and adding the new digit. (x = 122. reversed = 1, lastDigit = 2. reversed = 1 * 10 + 2 = 12. Now, reversed = 12)
     reversed = reversed * 10 + lastDigit;
 
-    // Remove the last digit from x. This truncates the decimal to get the integer part. This effectively removes the last digit from x. (x/10 = 12/10 = 1.2. Math.floor(1.2) = 1. Now, x = 1)
+    // Remove the last digit from x. This truncates the decimal to get the integer part. This effectively removes the last digit from x. (x/10 = 1221/10 = 122.1. Math.floor(12.2) = 12. Now, x = 12)
     x = Math.floor(x / 10);
   }
+  // Checks if the number is a palindrome by comparing the remaining x with reversed or an odd reversed number. x === Math.floor(reversed / 10) is taking an odd reversed ending of the original x and taking off the last digit (eg. 121, reversed at the end of the while loop is going to be 12. Yet 12 does not equal 1 so we need to check that the number after the remainder is equal to x)
   return x === reversed || x === Math.floor(reversed / 10);
 };
 
-console.log(isPalindrome(12));
+console.log(isPalindrome(1221));
