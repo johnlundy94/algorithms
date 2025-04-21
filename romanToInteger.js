@@ -42,9 +42,12 @@
 // 1989 I
 // 1994 V
 
+// Defines the input string s as "III", which should convert to 3.
 const s = "III";
 
+// Defines a function romanToInt that takes a string s (the Roman Numeral) and returns an integer.
 var romanToInt = function (s) {
+  // This is a hash map to map Roman numeral symbols to their integer values. This allows quick lookup of symbol's value.
   const numMap = {
     I: 1,
     V: 5,
@@ -54,13 +57,18 @@ var romanToInt = function (s) {
     D: 500,
     M: 1000,
   };
+  // Initializes a variable num to store the running total of the integer value. As we process each character, we'll add or subtract values to num to build the final result.
   let num = 0;
 
+  // For loop iterating through the roman numeral.
   for (let i = 0; i < s.length; i++) {
+    // Gets the integer value of the current Roman numeral symbol.
     const currentVal = numMap[s[i]];
 
+    // Gets the integer value of the next Roman numeral (if it exists) or 0.
     const nextVal = numMap[s[i + 1]] || 0;
 
+    // Determines whether to add or subtract the current symbol's value based on its relationship with the next symbol.
     if (currentVal < nextVal) {
       num -= currentVal;
     } else {
@@ -68,6 +76,7 @@ var romanToInt = function (s) {
     }
   }
 
+  // We are returning the num variables assigned integer after the for loop is checked
   return num;
 };
 
