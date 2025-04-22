@@ -35,5 +35,31 @@ let s = "([])";
 
 // 1 <= s.length <= 104
 // s consists of parentheses only '()[]{}'.
-// for loop going through the string, where if there is any of the open parentheses there must be the ending parentheses in the rest of the string.
-var isValid = function (s) {};
+
+// Lets see if we can solve this using a Map.
+// Declare a Map object
+// Iterate through s
+// Declare an if statement check
+// if s[i] = ) && Map.has("(") return true
+// if s[i] = ] && Map.has("[") return true
+// if s[i] = } && Map.has("{") return true
+// Inside the if statement's return statement we want to then return true
+// Then declare outside the if statement to Map.set(s[i], i)
+// Outside the for loop return false if no solution was found
+var isValid = function (s) {
+  const parenMap = new Map();
+
+  for (let i = 0; i < s.length; i++) {
+    if ((s[i] = ")" && parenMap.has("("))) {
+      return true;
+    } else if ((s[i] = "]" && parenMap.has("["))) {
+      return true;
+    } else if ((s[i] = "}" && parenMap.has("{"))) {
+      return true;
+    }
+    parenMap.set(s[i], i);
+  }
+  return false;
+};
+
+console.log(isValid(s));
