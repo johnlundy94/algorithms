@@ -50,16 +50,25 @@ var isValid = function (s) {
   const parenMap = new Map();
 
   for (let i = 0; i < s.length; i++) {
-    if ((s[i] = ")" && parenMap.has("("))) {
-      return true;
-    } else if ((s[i] = "]" && parenMap.has("["))) {
-      return true;
-    } else if ((s[i] = "}" && parenMap.has("{"))) {
-      return true;
+    if (s[i] === ")" && parenMap.has("(")) {
+      parenMap.delete("(");
+      parenMap.delete(")");
+    } else if (s[i] === "]" && parenMap.has("[")) {
+      parenMap.delete("[");
+      parenMap.delete("]");
+    } else if (s[i] === "}" && parenMap.has("{")) {
+      parenMap.delete("{");
+      parenMap.delete("}");
     }
     parenMap.set(s[i], i);
   }
-  return false;
+  if (parenMap.size === 0) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 console.log(isValid(s));
+
+// Update: We went through the understanding that we have to delete the objects in the Map. Now we need to figure out how to delete the ending parenthesis and also check the order oof the parenthesis. We stopped just before step two in the chat
