@@ -27,7 +27,7 @@
 // Example 4:
 
 // Input:
-let s = "([])";
+let s = "([{}])";
 
 // Output: true
 
@@ -36,39 +36,29 @@ let s = "([])";
 // 1 <= s.length <= 104
 // s consists of parentheses only '()[]{}'.
 
-// Lets see if we can solve this using a Map.
-// Declare a Map object
-// Iterate through s
-// Declare an if statement check
-// if s[i] = ) && Map.has("(") return true
-// if s[i] = ] && Map.has("[") return true
-// if s[i] = } && Map.has("{") return true
-// Inside the if statement's return statement we want to then return true
-// Then declare outside the if statement to Map.set(s[i], i)
-// Outside the for loop return false if no solution was found
 var isValid = function (s) {
-  const parenMap = new Map();
-
+  const parenMap = new Map([
+    [")", "("],
+    ["]", "["],
+    ["}", "{"],
+  ]);
+  const stack = [];
   for (let i = 0; i < s.length; i++) {
-    if (s[i] === ")" && parenMap.has("(")) {
-      parenMap.delete("(");
-      parenMap.delete(")");
-    } else if (s[i] === "]" && parenMap.has("[")) {
-      parenMap.delete("[");
-      parenMap.delete("]");
-    } else if (s[i] === "}" && parenMap.has("{")) {
-      parenMap.delete("{");
-      parenMap.delete("}");
+    if (s[i] === "(" || s[i] === "[" || s[i] === "{") {
+      stack.push(s[i]);
+    } else {
+      if (
+        stack.length === 0 ||
+        stack[stack.length - 1] !== parenMap.get(s[i])
+      ) {
+        return false;
+      }
+      stack.pop();
     }
-    parenMap.set(s[i], i);
   }
-  if (parenMap.size === 0) {
-    return true;
-  } else {
-    return false;
-  }
+  return stack.length === 0;
 };
 
 console.log(isValid(s));
 
-// Update: We went through the understanding that we have to delete the objects in the Map. Now we need to figure out how to delete the ending parenthesis and also check the order oof the parenthesis. We stopped just before step two in the chat
+// Update: Go through this line by line
