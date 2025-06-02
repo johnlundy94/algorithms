@@ -23,10 +23,27 @@
 // -100 <= Node.val <= 100
 // Both list1 and list2 are sorted in non-decreasing order.
 
-//Create a dummy head for the new linked list
-// While loop that iterates while list1 and list2 are not null
-// Define the value of each node so let val1 = list1.val and let val2 = list2.val
-// the only iteration that we need to check if either value is larger than the other is on the second iteration. There are no edge cases where this might be different. Also, we need to figure out how to move two list values to the dummy head list. Maybe assign it do the dummyHead.val? Where we got too here: If val2 > val1 dummyHead.push(val1) else dummyHead.push(val1) and dummyHead.push(val2)
-// Return dummyHead
+var mergeTwoLists = function (list1, list2) {
+  // Create a dummy nose to serve as the start of the merged list
+  // Why are we saying ListNode(-1)
+  let dummyHead = new ListNode(-1);
+  let current = dummyHead;
 
-var mergeTwoLists = function (list1, list2) {};
+  while (list1 !== null && list2 !== null) {
+    let val1 = list1.val;
+    let val2 = list2.val;
+
+    if (val2 > val1) {
+      // Point current's next to the smaller node
+      current.next = list1;
+      // advance list1
+    } else {
+      dummyHead.push(val1);
+      dummyHead.push(val2);
+    }
+
+    if (list1 !== null) list1 = list1.next;
+    if (list2 !== null) list2 = list2.next;
+  }
+  return dummyHead;
+};
