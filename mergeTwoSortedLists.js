@@ -25,7 +25,6 @@
 
 var mergeTwoLists = function (list1, list2) {
   // Create a dummy nose to serve as the start of the merged list
-  // Why are we saying ListNode(-1)
   let dummyHead = new ListNode(-1);
   let current = dummyHead;
 
@@ -37,13 +36,21 @@ var mergeTwoLists = function (list1, list2) {
       // Point current's next to the smaller node
       current.next = list1;
       // advance list1
+      list1 = list1.next;
     } else {
-      dummyHead.push(val1);
-      dummyHead.push(val2);
+      // Otherwise point to list2
+      current.next = list2;
+      // Advance list2
+      list2 = list2.next;
     }
-
-    if (list1 !== null) list1 = list1.next;
-    if (list2 !== null) list2 = list2.next;
+    // move current forward
+    current = current.next;
   }
-  return dummyHead;
+
+  // at least one list is now null.
+  // Attach the remaining part of the non-empty list.
+  current.next = list1 !== null ? list1 : list2;
+
+  // Return the merged list, skipping the dummy node.
+  return dummyHead.next;
 };
