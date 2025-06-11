@@ -25,7 +25,8 @@
 
 var mergeTwoLists = function (list1, list2) {
   // Create a dummy nose to serve as the start of the merged list
-  let dummyHead = new ListNode(-1);
+  let dummyHead = new ListNode(0);
+  // remember that nodes are objects. When you create a ListNode class you are creating in this instance {val: 0, next: null} these are just standard properties
   let current = dummyHead;
 
   while (list1 !== null && list2 !== null) {
